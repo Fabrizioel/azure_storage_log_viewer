@@ -31,7 +31,7 @@ to inspect log activity without leaving the terminal.
 ### Using `uv` (recommended)
 
 ```bash
-uv tool install git+https://github.com/<your-username>/azure-log-viewer.git
+uv tool install git+https://github.com/Fabrizioel/azure-log-viewer.git
 ```
 
 ---
