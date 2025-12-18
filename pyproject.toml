@@ -1,0 +1,15 @@
+[project]
+name = "azure-log-viewer"
+version = "0.1.0"
+description = "Textual TUI for browsing Azure File Shares and analyzing log files"
+readme = "README.md"
+requires-python = ">=3.12"
+
+dependencies = [
+    "textual>=0.60.0",
+    "azure-storage-file-share",
+    "pandas>=2.0.0"
+]
+
+[project.scripts]
+azure-log-viewer = "azure_log_viewer.app:main"
