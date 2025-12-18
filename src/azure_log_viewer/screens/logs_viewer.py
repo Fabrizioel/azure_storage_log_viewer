@@ -5,9 +5,9 @@ from textual.widgets import (Header, Footer, Input, Button, Label, Tree, Directo
 
 import datetime
 
-from helpers.obtain_files_paths import get_files_paths
-from utils.logs_files_processing import readLogs
-from widgets.azure_directory_tree import AzureDirectoryTree
+from azure_log_viewer.helpers.obtain_files_paths import get_files_paths
+from azure_log_viewer.utils.logs_files_processing import readLogs
+from azure_log_viewer.widgets.azure_directory_tree import AzureDirectoryTree
 
 class LogViewer(Screen):
     CSS = """
@@ -119,7 +119,7 @@ class LogViewer(Screen):
             id="folder_tree"
         )
 
-        self.run_worker(lambda: self.load_tree(sidebar=sidebar, azure_tree=azure_tree))
+        self.run_worker(self.load_tree(sidebar=sidebar, azure_tree=azure_tree))
 
     async def load_tree(self, sidebar, azure_tree):
         try:
@@ -166,17 +166,17 @@ class LogViewer(Screen):
             filename=filename
         )
 
-        self.call_from_thread(
+        self.app.call_from_thread(
             lambda: self.result_label.update(f"Se encontraron {len(logs)} archivos .log. Analizando...")
         )
 
         unique_complaints = readLogs(logs, start_date, end_date, account_name, account_key, share_name)
 
         def update_ui():
-            self.loading.display = False
+            # self.loading.display = False
             self.unique_complaints.display = True
 
             self.result_label.update("Archivos .log analizados exitosamente.")
             self.unique_complaints.update(f"{unique_complaints} reportes han sido registrados y/o se les han agregado comentarios.")
         
-        self.call_from_thread(update_ui)
+        self.app.call_from_thread(update_ui)

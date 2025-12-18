@@ -1,16 +1,18 @@
 from textual.app import App
 
-from screens.credentials import CredentialsScreen
-from screens.logs_viewer import LogViewer
+from azure_log_viewer.screens.credentials import CredentialsScreen
+from azure_log_viewer.screens.logs_viewer import LogViewer
 
-class Main(App):
+class AzureLogViewerApp(App):
     SCREENS = {
         "credentials": CredentialsScreen,
         "log_viewer": LogViewer
     }
 
+    def __init__(self):
+        super().__init__()
+
     def on_mount(self):
-        # self.push_screen(LogViewer(credentials=data))
         self.push_screen("credentials", self.on_credentials_entered)
 
     def on_credentials_entered(self, credentials):
@@ -20,6 +22,6 @@ class Main(App):
         
         self.push_screen(LogViewer(credentials=credentials))
 
-if __name__ == "__main__":
-    app = Main()
+def main() -> None:
+    app = AzureLogViewerApp()
     app.run()

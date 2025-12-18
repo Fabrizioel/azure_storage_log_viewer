@@ -1,10 +1,9 @@
-from datetime import datetime, date
+from datetime import datetime
 import pandas as pd
 
-from helpers.download_from_file_path import download_file
-from helpers.obtain_files_paths import get_files_paths
-from validations.ip_validations import is_valid_ip
-from validations.time_validations import is_valid_time
+from azure_log_viewer.helpers.download_from_file_path import download_file
+from azure_log_viewer.validations.ip_validations import is_valid_ip
+from azure_log_viewer.validations.time_validations import is_valid_time
 
 output_file = "output/ScanLogs_Output.xlsx"
 rows = []
@@ -23,19 +22,7 @@ def readLogs(logs, start_date, end_date, account_name, account_key, share_name) 
         except Exception as e:
             print(f"Error reading {log}: {e}")
     df = pd.DataFrame(rows, columns=["Status", "Date", "Time", "IP", "ComplaintId", "LogFile"])
-    # df.to_excel(output_file, sheet_name="Data", index=False)
 
-    # result = []
-    # for filename, group in df.groupby("LogFile"):
-        # unique_ids = group["ComplaintId"].nunique() 
-        # total_occurrences = group["ComplaintId"].count()
-        # result.append([filename, unique_ids, total_occurrences])
-
-    # summary_df = pd.DataFrame(result, columns=["Log Filename", "# of Complaints", "Sum of Occurrences"])
-    
-    # with pd.ExcelWriter(output_file, mode='a', engine='openpyxl') as writer:
-    #     summary_df.to_excel(writer, sheet_name="Summary", index=False)
-    
     unique_ids = df["ComplaintId"].nunique()
 
     return unique_ids
