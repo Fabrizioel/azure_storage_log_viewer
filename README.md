@@ -1,6 +1,6 @@
 # Azure Log Viewer
 
-![Azure Log Viewer TUI](assets/main_screen_capture.png)
+![Azure Log Viewer TUI](docs/assets/main_screen_capture.png)
 
 Azure Log Viewer is a terminal-based Textual application for browsing Azure File Share
 directories and analyzing `.log` files within a user-defined date range.
