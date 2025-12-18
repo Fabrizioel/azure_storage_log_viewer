@@ -30,7 +30,7 @@ to inspect log activity without leaving the terminal.
 
 ## Installation
 
-### Using [uv](https://docs.astral.sh/uv/getting-started/installation/) (recommended) on MacOS, Linux, and Windows.
+### Using [uv](https://docs.astral.sh/uv/getting-started/installation/) (recommended) on macOS, Linux, and Windows.
 
 ```bash
 uv tool install git+https://github.com/Fabrizioel/azure_storage_log_viewer.git
